@@ -72,8 +72,7 @@ module NewRelic
     report_on('Database adapter'  ) do
       begin
         if ::ActiveRecord::Base.respond_to?(:connection_db_config)
-          ActiveRecord::Base.configurations.configs_for(env_name: NewRelic::Control.instance.env, name: "primary")
-            .connection_db_config.configuration_hash['adapter']
+          ActiveRecord::Base.connection_db_config.configuration_hash[:adapter]
         else
           ActiveRecord::Base.configurations.configs_for(env_name: NewRelic::Control.instance.env, spec_name: "primary").config['adapter']
         end
